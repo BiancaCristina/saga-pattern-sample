@@ -1,0 +1,41 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "arn:aws:logs:AWS_REGION:AWS_ACCOUNT_ID:*"
+        },
+
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:logs:AWS_REGION:AWS_ACCOUNT_ID:log-group:/aws/lambda/route-check-time:*"
+            ]
+        },
+
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:SendMessage"
+            ],
+            "Resource": [
+                "arn:aws:sqs:AWS_REGION:AWS_ACCOUNT_ID:route-check-time-dlq"
+            ]
+        },
+
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sns:Publish"
+            ],
+            "Resource": [
+                "arn:aws:sns:AWS_REGION:AWS_ACCOUNT_ID:driver-cancel-trip-trigger-topic"
+            ]
+        }
+    ]
+}
